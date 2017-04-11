@@ -5,31 +5,33 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.conding.jvm.clz.ClassFile;
-import com.conding.jvm.clz.ClassIndex;
-import com.conding.jvm.constant.ClassInfo;
-import com.conding.jvm.constant.ConstantPool;
-import com.conding.jvm.constant.MethodRefInfo;
-import com.conding.jvm.constant.NameAndTypeInfo;
-import com.conding.jvm.constant.UTF8Info;
-import com.conding.jvm.loader.ClassFileLoader;
+import com.coding.jvm.clz.ClassFile;
+import com.coding.jvm.clz.ClassIndex;
+import com.coding.jvm.constant.ClassInfo;
+import com.coding.jvm.constant.ConstantPool;
+import com.coding.jvm.constant.MethodRefInfo;
+import com.coding.jvm.constant.NameAndTypeInfo;
+import com.coding.jvm.constant.UTF8Info;
+import com.coding.jvm.loader.ClassFileLoader;
+import com.coding.util.Util;
 
 public class ClassFileloaderTest {
 
 	
-	static String path1 = "D:\\workspace\\MyGithub\\coding2017\\group10\\904627477\\target\\classes";
-	static String path2 = "C:\temp";
+	static String path1 = "D:\\workspace\\MyGithub\\coding2017\\group10\\904627477\\mini-jvm\\target\\classes";
+	static String path2 = "C:\\test";
+	static String filePath = System.getProperty("user.dir")+"/bin/EmployeeV1.class";
 	
-	
-	private static final String FULL_QUALIFIED_CLASS_NAME = "com/conding/jvm/test/EmployeeV1";
+	private static final String FULL_QUALIFIED_CLASS_NAME = "com/coderising/jvm/test/EmployeeV1";
 	static ClassFile clzFile = null;
 	
 	static {
 		ClassFileLoader loader = new ClassFileLoader();
-		loader.addClassPath(path1);
-		String className = "com.coderising.jvm.test.EmployeeV1";
+		//loader.addClassPath(path1);
+		//String className = "com.coding.test.EmployeeV1";
+		//clzFile = loader.loadClass(className);
 		
-		clzFile = loader.loadClass(className);
+		clzFile = loader.loadFile(filePath);
 		clzFile.print();
 	}
 	
@@ -79,25 +81,11 @@ public class ClassFileloaderTest {
 		byte[] codes = new byte[]{byteCodes[0],byteCodes[1],byteCodes[2],byteCodes[3]};
 		
 		
-		String acctualValue = this.byteToHexString(codes);
+		String acctualValue = Util.getHexString(codes);
 		
 		Assert.assertEquals("cafebabe", acctualValue);
 	}
-    
-	private String byteToHexString(byte[] codes ){
-		StringBuffer buffer = new StringBuffer();
-		for(int i=0;i<codes.length;i++){
-			byte b = codes[i];
-			int value = b & 0xFF;
-			String strHex = Integer.toHexString(value);
-			if(strHex.length()< 2){
-				strHex = "0" + strHex;
-			}		
-			buffer.append(strHex);
-		}
-		return buffer.toString();
-	}
-	
+    	
 	/**
      * ----------------------------------------------------------------------
      */
