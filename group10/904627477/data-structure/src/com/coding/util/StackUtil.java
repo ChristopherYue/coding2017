@@ -25,7 +25,51 @@ public class StackUtil {
 			s.push(temp.get(i));
 		}
 	}
+	//非递归
+	public static void reverse1(Stack s) {
+		if(s==null||s.isEmpty()){
+			return ;
+		}
+		Stack temp1 = new Stack();
+		while(!s.isEmpty()){
+			temp1.push(s.pop());
+		}
+		Stack temp2 = new Stack();
+		while(!temp1.isEmpty()){
+			temp2.push(temp1.pop());
+		}
+		while(!temp2.isEmpty()){
+			s.push(temp2.pop());
+		}
+	}
+	
+	//递归
+	public static void reverse2(Stack s) {
+		if(s==null){
+			return ;
+		}
+		if(s.isEmpty()){
+			return ;
+		}else{
+			Object temp = s.pop();
+			reverse2(s);
+			addStackBottom(temp,s);
+			return ;
+		}
+	}
 
+	
+
+	private static void addStackBottom(Object obj, Stack s) {
+		Stack temp = new Stack();
+		while(!s.isEmpty()){
+			temp.push(s.pop());
+		}
+		s.push(obj);
+		while(!temp.isEmpty()){
+			s.push(temp.pop());
+		}
+	}
 	/**
 	 * 删除栈中的某个元素 注意：只能使用Stack的基本操作，即push,pop,peek,isEmpty， 可以使用另外一个栈来辅助
 	 * 

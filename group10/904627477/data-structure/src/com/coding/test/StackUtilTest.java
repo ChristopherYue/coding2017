@@ -33,6 +33,18 @@ public class StackUtilTest {
 		StackUtil.reverse(s);
 		assertEquals("1,2,3,4,5", s.toString());
 	}
+	
+	@Test
+	public void testReverse1() {
+		StackUtil.reverse1(s);
+		assertEquals("1,2,3,4,5", s.toString());
+	}
+	
+	@Test
+	public void testReverse2() {
+		StackUtil.reverse2(s);
+		assertEquals("1,2,3,4,5", s.toString());
+	}
 
 	@Test
 	public void testRemove() {

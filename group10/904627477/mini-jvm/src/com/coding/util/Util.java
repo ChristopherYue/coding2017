@@ -1,5 +1,6 @@
 package com.coding.util;
 
+import java.nio.ByteBuffer;
 import java.nio.LongBuffer;
 
 
@@ -25,16 +26,15 @@ public class Util {
     }  
   
     public static long getLong(byte[] bytes) {
-    	bytes = fill(8, bytes);
-        return (0xffL & (long) bytes[0]) | (0xff00L & ((long) bytes[1] << 8)) | (0xff0000L & ((long) bytes[2] << 16))  
-                | (0xff000000L & ((long) bytes[3] << 24)) | (0xff00000000L & ((long) bytes[4] << 32))  
-                | (0xff0000000000L & ((long) bytes[5] << 40)) | (0xff000000000000L & ((long) bytes[6] << 48))  
-                | (0xff00000000000000L & ((long) bytes[7] << 56));  
+    	ByteBuffer buff = ByteBuffer.allocate(8);
+    	buff.put(bytes);
+    	return buff.getLong();
     }  
   
     public static float getFloat(byte[] bytes) {
-    	//bytes = fill(2, bytes);
-        return Float.intBitsToFloat(getInt(bytes));  
+    	ByteBuffer buff = ByteBuffer.allocate(4);
+    	buff.put(bytes);
+    	return buff.getFloat();
     }  
   
     public static double getDouble(byte[] bytes) {  

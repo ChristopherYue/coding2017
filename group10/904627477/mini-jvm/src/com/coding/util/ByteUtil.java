@@ -4,7 +4,7 @@ import java.nio.charset.Charset;
 
 /**
  * Java基本数据类型和byte数组相互转化
- *  带整理
+ *  待整理
  * @author 
  *
  */
